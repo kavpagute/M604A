@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Anush & Kisky</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Adv. Prog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home_page') }}">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        Visualization
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('data_handicapped') }}">Handicapped Friendly</a>
+                        </li>
+                        <li><a class="dropdown-item" href="{{ url_for('data_freetoilet') }}">Free Toilet</a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('data_open24hours') }}">24 Hours Open</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('data_summary') }}">Summary</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Dataset of Toilets in Berlin</h1>
+            <p class="col-md-8 fs-4">Using Python, Postgres, Flask, HTML, Javascript, Chartjs and Bootstrap.</p>
+            <p>Summary Page</p>
+        </div>
+    </div>
+    <form method="POST">
+        <select name="choice" id="choice" class="form-select form-select-lg" aria-label="Default select example">
+            <option value="Hand" {% if ch == "Hand" %} selected {% endif %}>Handicapped Friendly</option>
+            <option value="Free" {% if ch == "Free" %} selected {% endif %}>Free Toilet</option>
+            <option value="Open" {% if ch == "Open" %} selected {% endif %}>Open for 24 Hours</option>
+            <option value="HasUrinal" {% if ch == "HasUrinal" %} selected {% endif %}>Has Urinal</option>
+            <option value="HasChangingTable" {% if ch == "HasChangingTable" %} selected {% endif %}>Has Changing Table</option>
+        </select>
+        <button type="submit" class="btn btn-success mt-2 mb-2">Try Me!</button>
+    </form>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Location</th>
+            <th scope="col">{{ columnhead }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for toilet in data %}
+        <tr>
+            <th scope="row">{{ toilet[0] }}</th>
+            <td>{{ toilet[1] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</body>
+</html>
