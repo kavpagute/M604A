@@ -15,7 +15,3 @@ GUI: HTML
 Database: PostgreSQL
 DBMS: PgAdmin4
 
-
-Develop by: Anush Sekar and Kisky Andy Vonn Pagute
-
-Happy Coding!
